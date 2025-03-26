@@ -1,6 +1,10 @@
 package domain;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public class Statistics {
+
   private final Lottos lottos;
   private final WinningNumbers winningNumbers;
   private final Money investedMoney;
@@ -11,23 +15,33 @@ public class Statistics {
     this.investedMoney = investedMoney;
   }
 
-  public int[] calculateMatchCounts(){
-    int[] matchCounts = new int[7];
-    for (Lotto lotto : lottos.getLottos()) {
-      int matches = winningNumbers.countMatches(lotto.getNumbers());
-      matchCounts[matches]++;
+  private Map<WinningRank, Integer> initializeMatchCounts() {
+    Map<WinningRank, Integer> matchCounts = new EnumMap<>(WinningRank.class);
+    for (WinningRank winningRank : WinningRank.values()) {
+      matchCounts.put(winningRank, 0);
     }
     return matchCounts;
   }
 
-  public long calculateTotalPrize(int[] matchCounts) {
-    return matchCounts[3] * 5000L +
-           matchCounts[4] * 50000L +
-           matchCounts[5] * 1500000L +
-           matchCounts[6] * 2000000000L;
+  public Map<WinningRank, Integer> calculateMatchCounts() {
+    Map<WinningRank, Integer> matchCounts = initializeMatchCounts();
+    for (Lotto lotto : lottos.getLottos()) {
+      int matches = winningNumbers.countMatches(lotto.getNumbers());
+      WinningRank rank = WinningRank.valueof(matches);
+      matchCounts.put(rank, matchCounts.get(rank) + 1);
+    }
+    return matchCounts;
   }
 
-  public double calculateProfitRate(int[] matchCounts) {
+  public long calculateTotalPrize(Map<WinningRank, Integer> matchCounts) {
+    long totalPrize = 0;
+    for (WinningRank rank : WinningRank.values()) {
+      totalPrize += rank.getPrize() * matchCounts.get(rank);
+    }
+    return totalPrize;
+  }
+
+  public double calculateProfitRate(Map<WinningRank, Integer> matchCounts) {
     long totalPrize = calculateTotalPrize(matchCounts);
     return investedMoney.calculateProfitRate(totalPrize);
   }
