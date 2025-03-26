@@ -1,8 +1,10 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
+
   private final NumbersGenerator numbersGenerator;
   private final List<Integer> numbers;
 
@@ -12,6 +14,6 @@ public class Lotto {
   }
 
   public List<Integer> getNumbers() {
-    return numbers;
+    return new ArrayList<>(numbers);
   }
 }

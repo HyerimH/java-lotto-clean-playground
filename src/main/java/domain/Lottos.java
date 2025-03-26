@@ -8,7 +8,7 @@ public class Lottos {
   private List<Lotto> lottos;
 
   private Lottos(List<Lotto> lottos) {
-    this.lottos = lottos;
+    this.lottos = new ArrayList<>(lottos);
   }
 
   public static Lottos createLottos(int amount, NumbersGenerator numbersGenerator) {
@@ -20,6 +20,6 @@ public class Lottos {
   }
 
   public List<Lotto> getLottos() {
-    return lottos;
+    return new ArrayList<>(lottos);
   }
 }

@@ -1,7 +1,10 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
+
 public class WinningNumbers {
+
   private final List<Integer> numbers;
 
   public WinningNumbers(List<Integer> numbers) {
@@ -12,5 +15,9 @@ public class WinningNumbers {
     return (int) lottoNumbers.stream()
         .filter(this.numbers::contains)
         .count();
+  }
+
+  public List<Integer> getNumbers() {
+    return new ArrayList<>(numbers);
   }
 }
