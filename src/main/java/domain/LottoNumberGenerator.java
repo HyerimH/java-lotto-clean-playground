@@ -8,9 +8,11 @@ import java.util.stream.IntStream;
 public class LottoNumberGenerator implements NumbersGenerator {
 
   private static final int LOTTO_SIZE = 6;
+  private static final int MIN_NUMBER = 1;
+  private static final int MAX_NUMBER = 45;
 
   private List<Integer> createBaseNumbers() {
-    return IntStream.rangeClosed(1, 45)
+    return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
         .boxed()
         .collect(Collectors.toList());
   }
