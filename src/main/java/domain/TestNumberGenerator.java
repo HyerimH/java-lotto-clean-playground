@@ -15,11 +15,12 @@ public class TestNumberGenerator implements NumbersGenerator {
 
   @Override
   public List<Integer> generate() {
-    if (index >= numbers.length) {
-      return new ArrayList<>();
+    List<Integer> result = new ArrayList<>(6);
+
+    for (int i = 0; i < 6; i++) {
+      result.add(index < numbers.length ? numbers[index++] : 0);
     }
-    List<Integer> result = new ArrayList<>();
-    result.add(numbers[index++]);
+
     return result;
   }
 }
