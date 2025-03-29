@@ -1,29 +1,22 @@
 package domain;
 
 public class Money {
-  private final int value;
-  public static final Money LOTTO_PRICE=new Money(1000);
+
+  private static final int MINIMUM_PURCHASE_MONEY = 1000;
+  private final int purchaseMoney;
 
   public Money(int value) {
-    validateTicketCount(value);
-    this.value = value;
+    validatePurchaseMoney(value);
+    this.purchaseMoney = value;
   }
 
-  private void validateTicketCount(int value) {
-    if (value < 1000) {
+  private void validatePurchaseMoney(int purchaseMoney) {
+    if (purchaseMoney < MINIMUM_PURCHASE_MONEY) {
       throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다.");
     }
   }
 
-  public int calculateTicketCount(){
-    return this.value / LOTTO_PRICE.getValue();
-  }
-
-  public double calculateProfitRate(long prize) {
-    return (double) prize / this.value;
-  }
-
-  public int getValue() {
-    return value;
+  public int getPurchaseMoney() {
+    return purchaseMoney;
   }
 }

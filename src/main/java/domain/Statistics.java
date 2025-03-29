@@ -41,8 +41,12 @@ public class Statistics {
     return totalPrize;
   }
 
+  private double calculateProfitRate(long prize) {
+    return (double) prize / investedMoney.getPurchaseMoney();
+  }
+
   public double calculateProfitRate(Map<WinningRank, Integer> matchCounts) {
     long totalPrize = calculateTotalPrize(matchCounts);
-    return investedMoney.calculateProfitRate(totalPrize);
+    return calculateProfitRate(totalPrize);
   }
 }
