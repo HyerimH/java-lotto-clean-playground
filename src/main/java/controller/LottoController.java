@@ -26,7 +26,7 @@ public class LottoController {
     Money money = new Money(inputView.getInt());
 
     // 로또 생성 및 출력
-    Lottos lottos = Lottos.createLottos(money.calculateTicketCount(), numbersGenerator);
+    Lottos lottos = Lottos.createLottos(money, numbersGenerator);
     resultView.printLottos(lottos);
 
     // 당첨 번호 입력
