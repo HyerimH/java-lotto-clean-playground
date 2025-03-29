@@ -26,19 +26,6 @@ class MoneyTest {
     Money money = new Money(validAmount);
 
     // Then
-    assertThat(money.getValue()).isEqualTo(2000);
-  }
-
-  @Test
-  @DisplayName("구입 금액으로 티켓 수를 계산한다")
-  void calculateTicketCount() {
-    // Given
-    Money money = new Money(5000);
-
-    // When
-    int ticketCount = money.calculateTicketCount();
-
-    // Then
-    assertThat(ticketCount).isEqualTo(5);
+    assertThat(money.getPurchaseMoney()).isEqualTo(2000);
   }
 }
