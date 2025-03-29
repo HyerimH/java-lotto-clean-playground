@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,22 +8,20 @@ import java.util.stream.IntStream;
 
 public class LottoNumberGenerator implements NumbersGenerator {
 
-  private static final int LOTTO_SIZE = 6;
-  private static final int MIN_NUMBER = 1;
-  private static final int MAX_NUMBER = 45;
+  private static final List<Integer> BASE_NUMBERS = createBaseNumbers();
 
-  private List<Integer> createBaseNumbers() {
-    return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+  private static List<Integer> createBaseNumbers() {
+    return IntStream.rangeClosed(Lotto.MIN_NUMBER, Lotto.MAX_NUMBER)
         .boxed()
-        .collect(Collectors.toList());
+        .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
   }
 
   @Override
   public List<Integer> generate() {
-    List<Integer> baseNumbers = createBaseNumbers();
+    List<Integer> baseNumbers = new ArrayList<>(BASE_NUMBERS);
     Collections.shuffle(baseNumbers);
-    List<Integer> integers = baseNumbers.subList(0, LOTTO_SIZE);
-    integers.sort(Integer::compareTo);
-    return integers;
+    List<Integer> result = baseNumbers.subList(0, Lotto.LOTTO_SIZE);
+    result.sort(Integer::compareTo);
+    return new ArrayList<>(result);
   }
 }
