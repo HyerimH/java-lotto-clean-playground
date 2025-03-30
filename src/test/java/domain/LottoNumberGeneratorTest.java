@@ -12,7 +12,8 @@ class LottoNumberGeneratorTest {
   @DisplayName("생성된 번호는 6개이다")
   void generateReturnsSixNumbers() {
     //Given
-    LottoNumberGenerator generator = new LottoNumberGenerator();
+    LottoNumberGenerator generator = new LottoNumberGenerator(LottoConfig.MIN_NUMBER, LottoConfig.MAX_NUMBER,
+        LottoConfig.LOTTO_SIZE);
 
     //When
     List<Integer> numbers = generator.generate();
@@ -25,7 +26,8 @@ class LottoNumberGeneratorTest {
   @DisplayName("생성된 번호는 중복되지 않는다")
   void generateNumbersWithoutDuplicates() {
     // Given
-    LottoNumberGenerator generator = new LottoNumberGenerator();
+    LottoNumberGenerator generator = new LottoNumberGenerator(LottoConfig.MIN_NUMBER, LottoConfig.MAX_NUMBER,
+        LottoConfig.LOTTO_SIZE);
 
     // When
     List<Integer> numbers = generator.generate();
@@ -38,7 +40,8 @@ class LottoNumberGeneratorTest {
   @DisplayName("생성된 번호는 정렬된다")
   void generateSortedNumbers() {
     // Given
-    LottoNumberGenerator generator = new LottoNumberGenerator();
+    LottoNumberGenerator generator = new LottoNumberGenerator(LottoConfig.MIN_NUMBER, LottoConfig.MAX_NUMBER,
+        LottoConfig.LOTTO_SIZE);
 
     // When
     List<Integer> numbers = generator.generate();
