@@ -12,7 +12,8 @@ class LottosTest {
   void createLottosWith5500() {
     // Given
     Money money = new Money(5500);
-    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(LottoConfig.MIN_NUMBER, LottoConfig.MAX_NUMBER,
+        LottoConfig.LOTTO_SIZE);
 
     // When
     Lottos lottos = Lottos.createLottos(money, lottoNumberGenerator);
@@ -20,7 +21,7 @@ class LottosTest {
     // Then
     assertThat(lottos.getTicketCount()).isEqualTo(5);
     assertThat(lottos.getLottos()).hasSize(5);
-    assertThat(lottos.getLottos().get(0).getNumbers()).hasSize(Lotto.LOTTO_SIZE);
+    assertThat(lottos.getLottos().get(0).getNumbers()).hasSize(LottoConfig.LOTTO_SIZE);
   }
 
   @Test
@@ -28,7 +29,8 @@ class LottosTest {
   void createLottosWith6000() {
     // Given
     Money money = new Money(6000);
-    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(LottoConfig.MIN_NUMBER, LottoConfig.MAX_NUMBER,
+        LottoConfig.LOTTO_SIZE);
 
     // When
     Lottos lottos = Lottos.createLottos(money, lottoNumberGenerator);
@@ -36,6 +38,6 @@ class LottosTest {
     // Then
     assertThat(lottos.getTicketCount()).isEqualTo(6);
     assertThat(lottos.getLottos()).hasSize(6);
-    assertThat(lottos.getLottos().get(0).getNumbers()).hasSize(Lotto.LOTTO_SIZE);
+    assertThat(lottos.getLottos().get(0).getNumbers()).hasSize(LottoConfig.LOTTO_SIZE);
   }
 }
