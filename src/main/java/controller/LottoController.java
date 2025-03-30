@@ -22,15 +22,14 @@ public class LottoController {
 
   public void run() {
     // 구매 금액 처리
-    resultView.printPurchaseMessage();
-    Money money = new Money(inputView.getInt());
+    int purchaseMoney = inputView.getPurchaseMoney();
+    Money money = new Money(purchaseMoney);
 
     // 로또 생성 및 출력
     Lottos lottos = Lottos.createLottos(money, numbersGenerator);
     resultView.printLottos(lottos);
 
     // 당첨 번호 입력
-    resultView.printWinningNumber();
     WinningNumbers winningNumbers = inputView.getWinningNumbers();
 
     // 당첨 결과 출력
