@@ -7,7 +7,6 @@ import java.util.Set;
 
 public class Lotto {
 
-  ;
   private final List<Integer> numbers;
 
   private Lotto(List<Integer> numbers) {

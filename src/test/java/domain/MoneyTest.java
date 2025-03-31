@@ -13,7 +13,7 @@ class MoneyTest {
   void throwExceptionWhenLessThan1000() {
     assertThatThrownBy(() -> new Money(500))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("구입 금액은 1000원 이상이어야 합니다.");
+        .hasMessage("구입 금액" + LottoConfig.MINIMUM_PURCHASE_MONEY + "원 이상이어야 합니다.");
   }
 
   @Test
