@@ -8,11 +8,13 @@ public class Statistics {
   private final Lottos lottos;
   private final WinningNumbers winningNumbers;
   private final Money investedMoney;
+  private final BonusNumber bonusNumber;
 
-  public Statistics(Lottos lottos, WinningNumbers winningNumbers, Money investedMoney) {
+  public Statistics(Lottos lottos, WinningNumbers winningNumbers, Money investedMoney, BonusNumber bonusNumber) {
     this.lottos = lottos;
     this.winningNumbers = winningNumbers;
     this.investedMoney = investedMoney;
+    this.bonusNumber = bonusNumber;
   }
 
   private Map<WinningRank, Integer> initializeMatchCounts() {
@@ -27,7 +29,8 @@ public class Statistics {
     Map<WinningRank, Integer> matchCounts = initializeMatchCounts();
     for (Lotto lotto : lottos.getLottos()) {
       int matches = winningNumbers.countMatches(lotto.getNumbers());
-      WinningRank rank = WinningRank.valueof(matches);
+      boolean hasBonus = lotto.getNumbers().contains(bonusNumber.getNumber());
+      WinningRank rank = WinningRank.valueof(matches, hasBonus);
       matchCounts.put(rank, matchCounts.get(rank) + 1);
     }
     return matchCounts;
