@@ -6,7 +6,7 @@ import java.util.List;
 public class Lottos {
 
   private static final int TICKET_PRICE = 1000;
-  static final int MINIMUM_PURCHASE_MONEY = 1000;
+  public static final int MINIMUM_PURCHASE_MONEY = 1000;
 
   private final List<Lotto> lottos;
   private final int ticketCount;
