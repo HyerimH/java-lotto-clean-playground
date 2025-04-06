@@ -33,13 +33,13 @@ class StatisticsTest {
                 new LottoNumber(12), new LottoNumber(13)))
     );
 
-    Lottos lottos = new Lottos(lottoList, 7, 7, new Money(7000));
+    Lottos lottos = new Lottos(lottoList, 7, 7, new LottoPrice(7000));
 
     WinningNumbers winningNumbers = new WinningNumbers(
         Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
             new LottoNumber(5), new LottoNumber(6)));
     BonusNumber bonusNumber = new BonusNumber(new LottoNumber(7), winningNumbers);
-    Money investedMoney = new Money(7000);
+    LottoPrice investedMoney = new LottoPrice(7000);
     Statistics statistics = new Statistics(lottos, winningNumbers, investedMoney, bonusNumber);
 
     // When

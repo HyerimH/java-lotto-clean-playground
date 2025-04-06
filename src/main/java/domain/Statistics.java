@@ -7,10 +7,10 @@ public class Statistics {
 
   private final Lottos lottos;
   private final WinningNumbers winningNumbers;
-  private final Money investedMoney;
+  private final LottoPrice investedMoney;
   private final BonusNumber bonusNumber;
 
-  public Statistics(Lottos lottos, WinningNumbers winningNumbers, Money investedMoney, BonusNumber bonusNumber) {
+  public Statistics(Lottos lottos, WinningNumbers winningNumbers, LottoPrice investedMoney, BonusNumber bonusNumber) {
     this.lottos = lottos;
     this.winningNumbers = winningNumbers;
     this.investedMoney = investedMoney;
