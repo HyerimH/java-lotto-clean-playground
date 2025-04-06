@@ -15,17 +15,30 @@ class StatisticsTest {
   void calculateMatchCounts() {
     // Given
     List<Lotto> lottoList = Arrays.asList(
-        Lotto.createManual(Arrays.asList(1, 2, 3, 4, 5, 6)),
-        Lotto.createManual(Arrays.asList(1, 2, 3, 4, 5, 7)),
-        Lotto.createManual(Arrays.asList(1, 2, 3, 4, 5, 9)),
-        Lotto.createManual(Arrays.asList(1, 2, 3, 4, 8, 9)),
-        Lotto.createManual(Arrays.asList(1, 2, 3, 9, 10, 11)),
-        Lotto.createManual(Arrays.asList(1, 2, 9, 10, 11, 12)),
-        Lotto.createManual(Arrays.asList(1, 9, 10, 11, 12, 13))
+        Lotto.createManual(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(6))),
+        Lotto.createManual(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(7))),
+        Lotto.createManual(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(9))),
+        Lotto.createManual(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(8), new LottoNumber(9))),
+        Lotto.createManual(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(9),
+            new LottoNumber(10), new LottoNumber(11))),
+        Lotto.createManual(
+            Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(9), new LottoNumber(10),
+                new LottoNumber(11), new LottoNumber(12))),
+        Lotto.createManual(
+            Arrays.asList(new LottoNumber(1), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11),
+                new LottoNumber(12), new LottoNumber(13)))
     );
+
     Lottos lottos = new Lottos(lottoList, 7, 7, new Money(7000));
-    WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-    BonusNumber bonusNumber = new BonusNumber(7, winningNumbers);
+
+    WinningNumbers winningNumbers = new WinningNumbers(
+        Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(6)));
+    BonusNumber bonusNumber = new BonusNumber(new LottoNumber(7), winningNumbers);
     Money investedMoney = new Money(7000);
     Statistics statistics = new Statistics(lottos, winningNumbers, investedMoney, bonusNumber);
 
@@ -34,7 +47,7 @@ class StatisticsTest {
     long totalPrize = statistics.calculateTotalPrize(matchCounts);
     double profitRate = statistics.calculateProfitRate(matchCounts);
 
-    // Then
+    // Then: 매칭된 로또 개수 검증
     assertThat(matchCounts.get(WinningRank.SIX)).isEqualTo(1);
     assertThat(matchCounts.get(WinningRank.FIVE_WITH_BONUS)).isEqualTo(1);
     assertThat(matchCounts.get(WinningRank.FIVE)).isEqualTo(1);
@@ -42,6 +55,7 @@ class StatisticsTest {
     assertThat(matchCounts.get(WinningRank.THREE)).isEqualTo(1);
     assertThat(matchCounts.get(WinningRank.NONE)).isEqualTo(2);
 
+    // Then: 총 상금 계산
     assertThat(totalPrize).isEqualTo(
         WinningRank.SIX.getPrize() +
         WinningRank.FIVE_WITH_BONUS.getPrize() +
@@ -50,6 +64,7 @@ class StatisticsTest {
         WinningRank.THREE.getPrize()
     );
 
+    // Then: 수익률 계산
     assertThat(profitRate).isEqualTo((double) totalPrize / investedMoney.getPurchaseMoney());
   }
 }

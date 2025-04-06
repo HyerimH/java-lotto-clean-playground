@@ -9,13 +9,17 @@ import org.junit.jupiter.api.Test;
 class BonusNumberTest {
 
   @Test
-  @DisplayName("보너스 번호는 당첨 번호와 중복되지 않아야 한다")
+  @DisplayName("보너스 번호는 로또 번호와 중복되지 않아야 한다")
   void bonusNumberShouldNotDuplicateWithWinningNumbers() {
-    WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-    BonusNumber bonusNumber = new BonusNumber(7, winningNumbers);
+    // Given
+    WinningNumbers winningNumbers = new WinningNumbers(
+        Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(6)));
+    LottoNumber bonusNumber = new LottoNumber(5);
 
-    assertThatThrownBy(() -> new BonusNumber(5, winningNumbers))
+    // When & Then
+    assertThatThrownBy(() -> new BonusNumber(bonusNumber, winningNumbers))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+        .hasMessage("보너스 번호는 로또 번호와 중복될 수 없습니다.");
   }
 }
