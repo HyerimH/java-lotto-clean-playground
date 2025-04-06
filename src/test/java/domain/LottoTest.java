@@ -1,5 +1,6 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
@@ -8,6 +9,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
+
+  @Test
+  @DisplayName("자동 생성된 로또 번호는 6개여야 한다")
+  void autoLottoShouldHave6Numbers() {
+    // Given
+    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+
+    // When
+    Lotto lotto = Lotto.createAuto(lottoNumberGenerator);
+
+    // Then
+    assertThat(lotto.getNumbers()).hasSize(Lotto.LOTTO_SIZE);
+  }
 
   @Test
   @DisplayName("생성된 로또 번호는 6개여야 한다")
