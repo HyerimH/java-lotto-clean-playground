@@ -19,13 +19,16 @@ public class LottoNumberGenerator{
     this(new Random());
   }
 
-  public List<Integer> generate(int minNumber, int maxNumber, int size) {
-    List<Integer> baseNumbers = IntStream.rangeClosed(minNumber, maxNumber)
+  public List<LottoNumber> generate() {
+    List<Integer> baseNumbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
         .boxed()
-        .collect(Collectors.toList());
+        .collect(Collectors.toCollection(ArrayList::new));
     Collections.shuffle(baseNumbers, random);
-    List<Integer> result = baseNumbers.subList(0, size);
-    result.sort(Integer::compareTo);
-    return new ArrayList<>(result);
+    List<Integer> result = baseNumbers.subList(0, Lotto.LOTTO_SIZE);
+    List<LottoNumber> lottoNumbers = result.stream()
+        .map(LottoNumber::new)
+        .sorted()
+        .toList();
+    return new ArrayList<>(lottoNumbers);
   }
 }
