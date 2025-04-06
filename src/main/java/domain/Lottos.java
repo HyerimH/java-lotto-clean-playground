@@ -11,73 +11,69 @@ public class Lottos {
   private final List<Lotto> lottos;
   private final int ticketCount;
   private final int manualTicketCount;
-  private final Money money;
+  private final Money purchaseMoney;
 
-  public Lottos(List<Lotto> lottos, int ticketCount, int manualTicketCount, Money money) {
-    validateManualCount(ticketCount, manualTicketCount);
+  public Lottos(List<Lotto> lottos, int ticketCount, int manualTicketCount, Money purchaseMoney) {
     this.lottos = new ArrayList<>(lottos);
     this.ticketCount = ticketCount;
     this.manualTicketCount = manualTicketCount;
-    this.money = money;
+    this.purchaseMoney = purchaseMoney;
+    validateManualCount();
   }
 
-  public static Lottos from(int purchaseMoney, List<Lotto> manualLottos, LottoNumberGenerator lottoNumberGenerator) {
+  public static Lottos from(long purchaseMoney, List<Lotto> manualLottos,  int manualTicketCount, LottoNumberGenerator lottoNumberGenerator) {
     Money money = new Money(purchaseMoney);
     int ticketCount = money.getTicketCount(TICKET_PRICE);
-    int manualTicketCount = manualLottos.size();
 
-    List<Lotto> lottoList = generateLottoList(manualLottos, ticketCount, lottoNumberGenerator);
+    int autoTicketCount = ticketCount - manualTicketCount;
+    List<Lotto> lottoList = generateLottoList(manualLottos, autoTicketCount, lottoNumberGenerator);
 
     return new Lottos(lottoList, ticketCount, manualTicketCount, money);
   }
 
-  private static List<Lotto> generateLottoList(List<Lotto> manualLottos, int ticketCount,
+  private static List<Lotto> generateLottoList(List<Lotto> manualLottos, int autoTicketCount,
       LottoNumberGenerator lottoNumberGenerator) {
     List<Lotto> lottoList = new ArrayList<>(manualLottos);
-    for (int i = 0; i < calculateAutoCount(ticketCount, manualLottos.size()); i++) {
+    for (int i = 0; i < autoTicketCount; i++) {
       lottoList.add(Lotto.createAuto(lottoNumberGenerator));
     }
     return lottoList;
   }
 
-  private static void validateManualCount(int ticketCount, int manualTicketCount) {
-    validateManualCountExcess(ticketCount, manualTicketCount);
-    validateNegativeManualCount(manualTicketCount);
+  private void validateManualCount() {
+    validateManualCountExcess();
+    validateNegativeManualCount();
   }
 
-  private static void validateManualCountExcess(int ticketCount, int manualTicketCount) {
+  private void validateManualCountExcess() {
     if (manualTicketCount > ticketCount) {
       throw new IllegalArgumentException("수동 구매 수는 전체 티켓 수를 초과할 수 없습니다.");
     }
   }
 
-  private static void validateNegativeManualCount(int manualTicketCount) {
+  private void validateNegativeManualCount() {
     if (manualTicketCount < 0) {
       throw new IllegalArgumentException("수동 구매 수는 음수일 수 없습니다.");
     }
-  }
-
-  private static int calculateAutoCount(int ticketCount, int manualCount) {
-    return ticketCount - manualCount;
   }
 
   public List<Lotto> getLottos() {
     return new ArrayList<>(lottos);
   }
 
-  public Integer getTicketCount() {
+  public int getTicketCount() {
     return ticketCount;
   }
 
-  public Integer getManualTicketCount() {
+  public int getManualTicketCount() {
     return manualTicketCount;
   }
 
-  public Integer getAutoTicketCount() {
+  public int getAutoTicketCount() {
     return ticketCount - manualTicketCount;
   }
 
-  public Money getMoney(){
-    return money;
+  public Money getPurchaseMoney() {
+    return purchaseMoney;
   }
 }

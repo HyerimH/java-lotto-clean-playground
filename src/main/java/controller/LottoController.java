@@ -24,7 +24,7 @@ public class LottoController {
 
   public void run() {
     // 구매 금액 처리
-    int purchaseMoney = inputView.getPurchaseMoney();
+    long purchaseMoney = inputView.getPurchaseMoney();
 
     // 수동 구매 수 입력
     int manualTicketCount = inputView.getManualTicketCount();
@@ -33,7 +33,7 @@ public class LottoController {
     List<Lotto> manualLottos = inputView.getManualLottoTickets(manualTicketCount);
 
     // 로또 생성 및 출력
-    Lottos lottos = Lottos.from(purchaseMoney, manualLottos, lottoNumberGenerator);
+    Lottos lottos = Lottos.from(purchaseMoney, manualLottos, manualTicketCount, lottoNumberGenerator);
     resultView.printLottos(lottos);
 
     // 당첨 번호 입력
@@ -43,7 +43,7 @@ public class LottoController {
     BonusNumber bonusNumber = new BonusNumber(inputView.getBonusNumber(), winningNumbers);
 
     // 당첨 결과 출력
-    Statistics statistics = new Statistics(lottos, winningNumbers, lottos.getMoney(), bonusNumber);
+    Statistics statistics = new Statistics(lottos, winningNumbers, lottos.getPurchaseMoney(), bonusNumber);
     resultView.printStatistics(statistics);
   }
 }
