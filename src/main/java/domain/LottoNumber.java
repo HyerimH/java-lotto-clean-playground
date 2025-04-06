@@ -1,6 +1,6 @@
 package domain;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
 
   public static final int MIN_NUMBER = 1;
   public static final int MAX_NUMBER = 45;

@@ -18,7 +18,7 @@ class LottosTest {
     LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
     // When
-    Lottos lottos = Lottos.from(purchaseMoney, new ArrayList<>(), 0,lottoNumberGenerator);
+    Lottos lottos = Lottos.from(purchaseMoney, new ArrayList<>(), 0, lottoNumberGenerator);
 
     // Then
     assertThat(lottos.getTicketCount()).isEqualTo(5);

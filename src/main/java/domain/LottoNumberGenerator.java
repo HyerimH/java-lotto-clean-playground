@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberGenerator{
+public class LottoNumberGenerator {
 
   private final Random random;
 

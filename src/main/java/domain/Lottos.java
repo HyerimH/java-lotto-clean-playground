@@ -21,7 +21,8 @@ public class Lottos {
     validateManualCount();
   }
 
-  public static Lottos from(long purchaseMoney, List<Lotto> manualLottos,  int manualTicketCount, LottoNumberGenerator lottoNumberGenerator) {
+  public static Lottos from(long purchaseMoney, List<Lotto> manualLottos, int manualTicketCount,
+      LottoNumberGenerator lottoNumberGenerator) {
     Money money = new Money(purchaseMoney);
     int ticketCount = money.getTicketCount(TICKET_PRICE);
 

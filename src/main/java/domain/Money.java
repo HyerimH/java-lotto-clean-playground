@@ -22,6 +22,6 @@ public class Money {
   }
 
   public int getTicketCount(long ticketPrice) {
-    return (int)(purchaseMoney / ticketPrice);
+    return (int) (purchaseMoney / ticketPrice);
   }
 }

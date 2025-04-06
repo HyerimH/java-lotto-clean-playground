@@ -10,7 +10,8 @@ import java.util.Map;
 public class ResultView {
 
   public void printLottos(Lottos lottos) {
-    System.out.println("\n수동으로 " + lottos.getManualTicketCount() + "장, 자동으로 " + lottos.getAutoTicketCount() + "개를 구매했습니다.");
+    System.out.println(
+        "\n수동으로 " + lottos.getManualTicketCount() + "장, 자동으로 " + lottos.getAutoTicketCount() + "개를 구매했습니다.");
     for (Lotto lotto : lottos.getLottos()) {
       System.out.println(lotto.getNumbers());
     }

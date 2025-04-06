@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbers {
+
   private final List<LottoNumber> winningNumbers;
 
   public WinningNumbers(List<LottoNumber> numbers) {
