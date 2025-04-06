@@ -18,13 +18,14 @@ public class Lottos {
     this.ticketCount = ticketCount;
     this.manualTicketCount = manualTicketCount;
     this.purchaseMoney = purchaseMoney;
+    validatePurchaseMoney(purchaseMoney.getPurchaseMoney());
     validateManualCount();
   }
 
   public static Lottos from(long purchaseMoney, List<Lotto> manualLottos, int manualTicketCount,
       LottoNumberGenerator lottoNumberGenerator) {
     Money money = new Money(purchaseMoney);
-    int ticketCount = money.getTicketCount(TICKET_PRICE);
+    int ticketCount = calculateTicketCount(purchaseMoney, TICKET_PRICE);
 
     int autoTicketCount = ticketCount - manualTicketCount;
     List<Lotto> lottoList = generateLottoList(manualLottos, autoTicketCount, lottoNumberGenerator);
@@ -41,6 +42,10 @@ public class Lottos {
     return lottoList;
   }
 
+  private static int calculateTicketCount(long purchaseMoney, long ticketPrice) {
+    return (int) (purchaseMoney / ticketPrice);
+  }
+  
   private void validateManualCount() {
     validateManualCountExcess();
     validateNegativeManualCount();
@@ -55,6 +60,14 @@ public class Lottos {
   private void validateNegativeManualCount() {
     if (manualTicketCount < 0) {
       throw new IllegalArgumentException("수동 구매 수는 음수일 수 없습니다.");
+    }
+  }
+
+  private static void validatePurchaseMoney(long purchaseMoney) {
+    if (purchaseMoney < MINIMUM_PURCHASE_MONEY) {
+      throw new IllegalArgumentException(
+          "구입 금액은 " + MINIMUM_PURCHASE_MONEY + "원 이상이어야 합니다."
+      );
     }
   }
 
