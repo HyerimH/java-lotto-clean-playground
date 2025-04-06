@@ -28,8 +28,8 @@ public class Statistics {
   public Map<WinningRank, Integer> calculateMatchCounts() {
     Map<WinningRank, Integer> matchCounts = initializeMatchCounts();
     for (Lotto lotto : lottos.getLottos()) {
-      int matches = winningNumbers.countMatches(lotto.getNumbers());
-      boolean hasBonus = lotto.getNumbers().contains(bonusNumber.getNumber());
+      int matches = winningNumbers.countMatches(lotto);
+      boolean hasBonus = bonusNumber.isSameAs(lotto);
       WinningRank rank = WinningRank.valueof(matches, hasBonus);
       matchCounts.put(rank, matchCounts.get(rank) + 1);
     }
