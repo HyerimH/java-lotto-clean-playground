@@ -18,9 +18,8 @@ public class Lottos {
     validateManualCount();
   }
 
-  public static Lottos from(long purchaseMoney, List<Lotto> manualLottos, int manualTicketCount,
+  public static Lottos from(LottoPrice lottoPrice, List<Lotto> manualLottos, int manualTicketCount,
       LottoNumberGenerator lottoNumberGenerator) {
-    LottoPrice lottoPrice = new LottoPrice(purchaseMoney);
     int ticketCount = lottoPrice.calculateTicketCount();
 
     int autoTicketCount = ticketCount - manualTicketCount;

@@ -3,7 +3,7 @@ package domain;
 public class LottoPrice {
 
   private static final int TICKET_PRICE = 1_000;
-  public static final int MINIMUM_PURCHASE_MONEY = 1_000;
+  private static final int MINIMUM_PURCHASE_MONEY = 1_000;
 
   private final long purchaseMoney;
 

@@ -3,6 +3,7 @@ package controller;
 import domain.BonusNumber;
 import domain.Lotto;
 import domain.LottoNumberGenerator;
+import domain.LottoPrice;
 import domain.Lottos;
 import domain.Statistics;
 import domain.WinningNumbers;
@@ -24,7 +25,8 @@ public class LottoController {
 
   public void run() {
     // 구매 금액 처리
-    long purchaseMoney = inputView.getPurchaseMoney();
+    long money = inputView.getPurchaseMoney();
+    LottoPrice purchaseMoney=new LottoPrice(money);
 
     // 수동 구매 수 입력
     int manualTicketCount = inputView.getManualTicketCount();
