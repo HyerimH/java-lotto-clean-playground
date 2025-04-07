@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-  public static final int LOTTO_SIZE = 6;
+  private static final int LOTTO_SIZE = 6;
 
   public final List<LottoNumber> numbers;
 
@@ -16,7 +16,7 @@ public class Lotto {
   }
 
   public static Lotto createAuto(LottoNumberGenerator lottoNumberGenerator) {
-    List<LottoNumber> generatedNumbers = lottoNumberGenerator.generate();
+    List<LottoNumber> generatedNumbers = lottoNumberGenerator.generate(LOTTO_SIZE);
     validate(generatedNumbers);
     return new Lotto(generatedNumbers);
   }

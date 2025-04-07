@@ -10,10 +10,10 @@ class LottoPriceTest {
 
   @Test
   @DisplayName("구입 금액이 1000원 미만이면 예외가 발생한다")
-  void throwExceptionWhenLessThan1000() {
+  void throwExceptionWhenLessThanMinmumPurchaseMoney() {
     assertThatThrownBy(() -> new LottoPrice(500))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("구입 금액은 " + LottoPrice.MINIMUM_PURCHASE_MONEY + "원 이상이어야 합니다.");
+        .hasMessage("구입 금액은 1000원 이상이어야 합니다.");
   }
 
   @Test

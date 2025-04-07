@@ -10,21 +10,21 @@ import java.util.stream.IntStream;
 public class LottoNumberGenerator {
 
   private final Random random;
+  private final int minNumber;
+  private final int maxNumber;
 
-  public LottoNumberGenerator(Random random) {
+  public LottoNumberGenerator(Random random, int minNumber, int maxNumber) {
     this.random = random;
+    this.minNumber = minNumber;
+    this.maxNumber = maxNumber;
   }
 
-  public LottoNumberGenerator() {
-    this(new Random());
-  }
-
-  public List<LottoNumber> generate() {
-    List<Integer> baseNumbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+  public List<LottoNumber> generate(int lottoSize) {
+    List<Integer> baseNumbers = IntStream.rangeClosed(minNumber, maxNumber)
         .boxed()
         .collect(Collectors.toCollection(ArrayList::new));
     Collections.shuffle(baseNumbers, random);
-    List<Integer> result = baseNumbers.subList(0, Lotto.LOTTO_SIZE);
+    List<Integer> result = baseNumbers.subList(0, lottoSize);
     List<LottoNumber> lottoNumbers = result.stream()
         .map(LottoNumber::new)
         .sorted()

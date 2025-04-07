@@ -1,9 +1,11 @@
 package domain;
 
+import java.util.Random;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
-  public static final int MIN_NUMBER = 1;
-  public static final int MAX_NUMBER = 45;
+  private static final int MIN_NUMBER = 1;
+  private static final int MAX_NUMBER = 45;
   private final int number;
 
   public LottoNumber(int number) {
@@ -31,5 +33,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
   @Override
   public String toString() {
     return String.valueOf(number);
+  }
+
+  public static LottoNumberGenerator createLottoNumberGenerator() {
+    return new LottoNumberGenerator(new Random(), MIN_NUMBER, MAX_NUMBER);
   }
 }

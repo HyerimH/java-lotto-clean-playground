@@ -14,8 +14,8 @@ class LottosTest {
   @DisplayName("구입 금액 5500원으로 티켓을 생성할 때, 5개의 티켓만 생성된다")
   void createLottosWith5500() {
     // Given
-    long purchaseMoney = 5500;
-    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    LottoPrice purchaseMoney = new LottoPrice(5500);
+    LottoNumberGenerator lottoNumberGenerator = LottoNumber.createLottoNumberGenerator();
 
     // When
     Lottos lottos = Lottos.from(purchaseMoney, new ArrayList<>(), 0, lottoNumberGenerator);
@@ -29,8 +29,8 @@ class LottosTest {
   @DisplayName("구입 금액 6000원으로 티켓을 생성할 때, 6개의 티켓이 생성된다")
   void createLottosWith6000() {
     // Given
-    long purchaseMoney = 6000;
-    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    LottoPrice purchaseMoney = new LottoPrice(6000);
+    LottoNumberGenerator lottoNumberGenerator = LottoNumber.createLottoNumberGenerator();
 
     // When
     Lottos lottos = Lottos.from(purchaseMoney, new ArrayList<>(), 0, lottoNumberGenerator);
@@ -44,8 +44,8 @@ class LottosTest {
   @DisplayName("수동 티켓 수가 음수일 경우 예외가 발생한다.")
   void manualTicketCountCannotNegative() {
     // Given
-    long purchaseMoney = 6000;
-    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    LottoPrice purchaseMoney = new LottoPrice(6000);
+    LottoNumberGenerator lottoNumberGenerator = LottoNumber.createLottoNumberGenerator();
 
     List<Lotto> manualLottos = new ArrayList<>();
     manualLottos.add(Lotto.createManual(List.of(new LottoNumber(1), new LottoNumber(2),

@@ -14,13 +14,13 @@ class LottoTest {
   @DisplayName("자동 생성된 로또 번호는 6개여야 한다")
   void autoLottoShouldHave6Numbers() {
     // Given
-    LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    LottoNumberGenerator lottoNumberGenerator = LottoNumber.createLottoNumberGenerator();
 
     // When
     Lotto lotto = Lotto.createAuto(lottoNumberGenerator);
 
     // Then
-    assertThat(lotto.getNumbers()).hasSize(Lotto.LOTTO_SIZE);
+    assertThat(lotto.getNumbers()).hasSize(6);
   }
 
   @Test
